@@ -1,0 +1,21 @@
+--import package TweenService
+local TweenService = game:GetService("TweenService")
+
+--part = parent of this script i,e, boulder object
+local part = script.Parent
+
+--boulders current postition
+part.Position = Vector3.new(375, 189.5, -445.5)
+
+--goal = boulder starting position
+--loop - every 5 seconds resets boulder position to starting position
+while true do
+	wait(5)
+	local goal = {}
+	goal.Position = Vector3.new(375, 189.5, -445.5)
+
+
+	local tweenInfo = TweenInfo.new(.01)
+	local tween = TweenService:Create(part, tweenInfo, goal)
+	tween:Play() 
+end

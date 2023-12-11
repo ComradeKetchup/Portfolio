@@ -1,0 +1,42 @@
+--import "packages" 
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+--define local variable folder as the scripts parent
+local LeftPalletController = script.Parent
+--for loop to cycle through all children of the folder
+for i, part in pairs(LeftPalletController:GetChildren())do
+	--checks if child of folder (part) is a "BasePart", makes sure tween info is only applied to blocks.	
+	if part:IsA("BasePart")then
+		local tweenInfo = TweenInfo.new(
+			2,								--speed of transition (can be random with math.random(x,x)
+			Enum.EasingStyle.Linear, 		--tween animation style (linear, etc)
+			Enum.EasingDirection.InOut,		--direction of tween(in,out, or inout)
+			-1,								--number of times tween will be implemented (-1 = infinite)
+			true							--true to make object return, false to not return
+			--insert delay time here
+		)
+		
+		--create instance of parts to be tweened along with what to manipulate
+		local tween = TweenService:Create(part, tweenInfo, {
+		CFrame = part.CFrame * CFrame.new (0,0,-10)})
+
+		tween:Play()
+		
+		--script to update the velocity of the part so that proper physics is implemented
+		local lastPosition = part.Position
+
+		RunService.Stepped:Connect(function(_, deltaTime)
+
+			local currentPosition = part.Position
+			local deltaPosition = currentPosition - lastPosition
+
+			local velocity = deltaPosition / deltaTime
+			part.AssemblyLinearVelocity = velocity
+
+			lastPosition = currentPosition end) --function end
+
+	end --if statement end
+
+
+end	--for loop end

@@ -10,10 +10,10 @@ for i, part in pairs(LeftPalletController:GetChildren())do
 	if part:IsA("BasePart")then
 		local tweenInfo = TweenInfo.new(
 			2,								--speed of transition (can be random with math.random(x,x)
-			Enum.EasingStyle.Linear, 		--tween animation style (linear, etc)
-			Enum.EasingDirection.InOut,		--direction of tween(in,out, or inout)
+			Enum.EasingStyle.Linear, 					--tween animation style (linear, etc)
+			Enum.EasingDirection.InOut,					--direction of tween(in,out, or inout)
 			-1,								--number of times tween will be implemented (-1 = infinite)
-			true							--true to make object return, false to not return
+			true								--true to make object return, false to not return
 			--insert delay time here
 		)
 		
